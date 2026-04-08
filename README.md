@@ -98,10 +98,11 @@ Run these commands in Claude Code:
 
 ### Updating
 
-To update to the latest version without reinstalling:
+To update to the latest version, reinstall the plugin:
 
 ```
-/plugin update vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/plugin uninstall vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/plugin install vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
 /reload-plugins
 ```
 

@@ -98,10 +98,11 @@ AI 辅助编程（vibe coding）正在让越来越多的人能够快速写出可
 
 ### 更新
 
-无需卸载重装，直接更新到最新版本：
+重新安装插件即可更新到最新版本：
 
 ```
-/plugin update vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/plugin uninstall vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/plugin install vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
 /reload-plugins
 ```
 
