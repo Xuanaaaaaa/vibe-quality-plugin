@@ -16,6 +16,5 @@
     "./agents/interpreter.md",
     "./agents/reporter.md"
   ],
-  "skills": ["./skills/"],
-  "hooks": "./hooks/hooks.json"
+  "skills": ["./skills/"]
 }
