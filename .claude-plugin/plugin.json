@@ -1,0 +1,56 @@
+{
+  "name": "vibe-quality-plugin",
+  "version": "0.1.0",
+  "description": "对 Python 代码进行重构前后的质量对比分析，基于 McCabe、CWE、DRY 等权威标准，生成面向 vibe coder 的可读报告",
+  "author": {
+    "name": "Xuanaaaaaa",
+    "email": "1790943825@qq.com"
+  },
+  "repository": "https://github.com/Xuanaaaaaa/vibe-quality-plugin",
+  "homepage": "https://github.com/Xuanaaaaaa/vibe-quality-plugin",
+  "license": "MIT",
+  "keywords": ["python", "code-quality", "vibe-coding", "refactoring", "radon", "ruff", "bandit"],
+  "commands": [
+    {
+      "name": "quality-check",
+      "description": "对比两个 Python 代码目录的质量，输出6维度评分与综合对比报告",
+      "file": "commands/quality-check.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "scanner",
+      "description": "调用 radon/ruff/bandit/jscpd 对两个目录进行客观数据采集",
+      "file": "agents/scanner.md"
+    },
+    {
+      "name": "interpreter",
+      "description": "对照 standards/references.md 对扫描数据进行6维度评分",
+      "file": "agents/interpreter.md"
+    },
+    {
+      "name": "reporter",
+      "description": "将评分结果转化为面向 vibe coder 的对比报告",
+      "file": "agents/reporter.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "vibe-explain",
+      "description": "用大白话和建筑比喻向非技术用户解释代码质量问题",
+      "file": "skills/vibe-explain/SKILL.md"
+    }
+  ],
+  "hooks": [
+    {
+      "event": "PreToolUse",
+      "matcher": "quality-check",
+      "command": "bash hooks/auto-install.sh"
+    }
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "tools": ["radon", "ruff", "bandit", "jscpd"],
+    "note": "工具缺失时由 hooks/auto-install.sh 自动安装"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Xuanaaaaaa-vibe-quality-plugin",
+  "description": "vibe-quality-plugin 插件市场",
+  "plugins": [
+    {
+      "name": "vibe-quality-plugin",
+      "description": "对 Python 代码进行重构前后的质量对比分析，生成6维度评分与面向 vibe coder 的可读报告",
+      "version": "0.1.0",
+      "source": "."
+    }
+  ]
+}
