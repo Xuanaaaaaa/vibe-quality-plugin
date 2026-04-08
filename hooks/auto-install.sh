@@ -19,9 +19,9 @@ fail() { echo -e "${RED}  ✗ $1${RESET}"; }
 # ── 工具定义 ──────────────────────────────────────────
 # 格式：工具名|pip包名|检测命令|用途|对应维度
 TOOLS=(
-  "radon|radon|radon --version|圈复杂度 & 可维护性指数|复杂度 / 可读性"
-  "ruff|ruff|ruff --version|潜在 Bug 检测|潜在Bug & 健壮性"
-  "bandit|bandit|bandit --version|安全漏洞扫描|安全性"
+  "radon|radon|python3 -m radon --version|圈复杂度 & 可维护性指数|复杂度 / 可读性"
+  "ruff|ruff|python3 -m ruff --version|潜在 Bug 检测|潜在Bug & 健壮性"
+  "bandit|bandit|python3 -m bandit --version|安全漏洞扫描|安全性"
   "jscpd|jscpd|jscpd --version|代码重复率检测|简洁性"
 )
 
