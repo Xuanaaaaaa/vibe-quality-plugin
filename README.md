@@ -96,6 +96,15 @@ Run these commands in Claude Code:
 
 **Requirements**: Python ≥ 3.8. External tools (`radon`, `ruff`, `bandit`, `jscpd`) are auto-installed on first run — no manual setup needed.
 
+### Updating
+
+To update to the latest version without reinstalling:
+
+```
+/plugin update vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/reload-plugins
+```
+
 ---
 
 ### Usage

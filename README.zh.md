@@ -96,6 +96,15 @@ AI 辅助编程（vibe coding）正在让越来越多的人能够快速写出可
 
 **依赖环境**：Python ≥ 3.8。外部工具（`radon`、`ruff`、`bandit`、`jscpd`）在首次运行时自动安装，无需手动配置。
 
+### 更新
+
+无需卸载重装，直接更新到最新版本：
+
+```
+/plugin update vibe-quality-plugin@Xuanaaaaaa-vibe-quality-plugin
+/reload-plugins
+```
+
 ---
 
 ### 使用方法
