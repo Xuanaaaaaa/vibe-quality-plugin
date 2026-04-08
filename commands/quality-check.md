@@ -1,3 +1,8 @@
+---
+description: 对 Python 代码进行重构前后的质量对比分析，生成六维评分报告
+allowed-tools: Bash, Read, Write, Glob, Grep, Agent
+---
+
 # Command: quality-check
 
 ## 用法
