@@ -1,3 +1,8 @@
+---
+description: 基于已知质量代码库校准六维评分规则，诊断系统性偏差并提议规则修改
+allowed-tools: Bash, Read, Write, Glob, Grep, Agent
+---
+
 # Command: calibrate
 
 ## 用法
