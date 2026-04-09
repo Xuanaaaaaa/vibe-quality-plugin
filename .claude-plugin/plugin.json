@@ -1,6 +1,6 @@
 {
   "name": "vibe-quality-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "对 Python 代码进行重构前后的质量对比分析，基于 McCabe、CWE、DRY 等权威标准，生成面向 vibe coder 的可读报告",
   "author": {
     "name": "Xuanaaaaaa",
