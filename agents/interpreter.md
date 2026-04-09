@@ -13,7 +13,7 @@
 
 ## 输入
 
-- scanner 输出的 JSON（包含 before 和 after 的所有原始数字）
+- scanner 输出的 JSON（包含 `mode` 字段和目录数据）
 - `standards/references.md`（评分规则来源，**每次打分前必须重新读取**）
 
 ---
@@ -26,7 +26,12 @@
 
 ---
 
-### 第二步：对 before 和 after 分别打分
+### 第二步：检测模式并打分
+
+检查 scanner JSON 中的 `mode` 字段：
+
+- **single 模式**：只对 `current` 打一次 6 维度分，跳过 delta 计算
+- **compare 模式**：对 `before` 和 `after` 分别独立打分，再计算 delta
 
 对每个目录独立评分，互不参考。评分顺序如下：
 
@@ -132,8 +137,66 @@
 
 严格按照以下格式输出：
 
+**single 模式**：
 ```json
 {
+  "mode": "single",
+  "scores": {
+    "current": {
+      "complexity": {
+        "score": <1-10>,
+        "data": {"average_grade": "<>", "average_complexity": <>},
+        "source": "🔢 客观",
+        "reference": "McCabe (1976) / radon 官方评级"
+      },
+      "bug_robustness": {
+        "score": <1-10>,
+        "data": {"errors_per_100_lines": <>, "total_errors": <>},
+        "source": "🔢 客观",
+        "reference": "CWE Top 25（部分）/ Clean Code (Martin, 2008)"
+      },
+      "security": {
+        "score": <1-10 或 null>,
+        "data": {"high": <>, "medium": <>, "low": <>},
+        "source": "🔢 客观",
+        "reference": "CWE Top 25 (MITRE) / bandit"
+      },
+      "simplicity": {
+        "score": <1-10 或 null>,
+        "data": {"duplication_percentage": <>},
+        "source": "🔢 客观",
+        "reference": "DRY 原则 / The Pragmatic Programmer (1999)"
+      },
+      "readability": {
+        "score": <1-10>,
+        "objective_base": <1/4/7>,
+        "subjective_adjustments": {
+          "naming": <-1/0/+1>,
+          "comments": <-1/0/+1>,
+          "structure": <-1/0/+1>
+        },
+        "radon_mi": {"average_mi": <>, "average_grade": "<>"},
+        "adjustment_reason": "<一句大白话>",
+        "source": "🔢 客观辅助 + 🤖 主观修正",
+        "reference": "radon MI (Oman 1992) / Google Eng Practices / Clean Code"
+      },
+      "maintainability": {
+        "score": <1-10>,
+        "reason": "<一句大白话>",
+        "source": "🤖 主观",
+        "reference": "Yourdon & Constantine (1979) / Google Eng Practices"
+      },
+      "total": <各维度得分之和，null 维度不计入>,
+      "valid_dimensions": <参与计分的维度数量>
+    }
+  }
+}
+```
+
+**compare 模式**：
+```json
+{
+  "mode": "compare",
   "scores": {
     "before": {
       "complexity": {

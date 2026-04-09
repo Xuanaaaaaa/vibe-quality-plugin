@@ -8,16 +8,19 @@ allowed-tools: Bash, Read, Write, Glob, Grep, Agent
 ## 用法
 
 ```
+/quality-check <目录> [--html]
 /quality-check <before_dir> <after_dir> [--html]
 ```
 
 **参数说明**：
-- `before_dir`：重构前代码目录路径（必填）
-- `after_dir`：重构后代码目录路径（必填）
+- 单目录模式：传入 1 个目录路径，对该目录进行绝对质量评分，与行业基准对比
+- 对比模式：传入 2 个目录路径（重构前/后），进行对比评分
 - `--html`：生成 HTML 可视化报告（可选）
 
 **示例**：
 ```
+/quality-check ./my-library
+/quality-check ./my-library --html
 /quality-check ./my-prototype ./my-refactored-code
 /quality-check ./my-prototype ./my-refactored-code --html
 ```
@@ -28,13 +31,20 @@ allowed-tools: Bash, Read, Write, Glob, Grep, Agent
 
 ### 阶段 0：参数校验
 
-检查参数是否完整，若缺少 `before_dir` 或 `after_dir`，输出提示并停止：
+统计非 `--html` 参数的数量，判断运行模式：
+
+- **单目录模式**（1 个参数）：对该目录进行绝对质量评分，与行业基准对比
+- **对比模式**（2 个参数）：对 before/after 两个目录进行对比评分（原有行为）
+- **参数错误**（0 个或 3 个以上）：输出提示并停止：
+
 ```
-用法：/quality-check <重构前目录> <重构后目录> [--html]
-示例：/quality-check ./before ./after
+用法：
+  /quality-check <目录>                    # 单目录评分
+  /quality-check <重构前目录> <重构后目录>  # 对比评分
+可选参数：--html（生成 HTML 报告）
 ```
 
-记录是否携带 `--html` 标志，供后续 reporter 使用。
+记录运行模式（`single` / `compare`）和 `--html` 标志，供后续阶段使用。
 
 ---
 
@@ -51,7 +61,9 @@ allowed-tools: Bash, Read, Write, Glob, Grep, Agent
 
 ### 阶段 2：数据采集
 
-调用 `agents/scanner.md`，传入两个目录路径。
+调用 `agents/scanner.md`，传入运行模式和目录路径：
+- single 模式：传入 `MODE=single`、`DIR=<目录路径>`
+- compare 模式：传入 `MODE=compare`、`BEFORE_DIR=<重构前>`、`AFTER_DIR=<重构后>`
 
 等待 `SCANNER_DONE` 信号。
 
@@ -63,6 +75,9 @@ allowed-tools: Bash, Read, Write, Glob, Grep, Agent
 
 调用 `agents/interpreter.md`，传入 scanner 的 JSON 输出。
 
+- single 模式：只对 current 打分，跳过 delta 计算
+- compare 模式：对 before/after 分别打分并计算 delta
+
 等待 `INTERPRETER_DONE` 信号。
 
 ---
@@ -70,6 +85,9 @@ allowed-tools: Bash, Read, Write, Glob, Grep, Agent
 ### 阶段 4：报告生成
 
 调用 `agents/reporter.md`，传入 interpreter 的评分 JSON 和 `--html` 标志状态。
+
+- single 模式：使用单列格式，与行业基准对比
+- compare 模式：使用双列对比格式
 
 等待 `REPORTER_DONE` 信号。
 
