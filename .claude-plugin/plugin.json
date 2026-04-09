@@ -10,7 +10,10 @@
   "homepage": "https://github.com/Xuanaaaaaa/vibe-quality-plugin",
   "license": "MIT",
   "keywords": ["python", "code-quality", "vibe-coding", "refactoring", "radon", "ruff", "bandit"],
-  "commands": ["./commands/quality-check.md"],
+  "commands": [
+    "./commands/quality-check.md",
+    "./commands/calibrate.md"
+  ],
   "agents": [
     "./agents/scanner.md",
     "./agents/interpreter.md",
