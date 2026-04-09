@@ -6,7 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `vibe-quality-plugin` 是一个 Claude Code 插件，用于对 Python 代码进行重构前后的质量对比分析。面向 AI 辅助开发者（vibe coders），通过客观指标和 AI 评估提供量化的质量改善反馈。
 
-**插件入口命令**：`/quality-check <before_dir> <after_dir> [--html]`
+**插件入口命令**：
+- 单目录模式：`/vibe-quality-plugin:quality-check <dir> [--html]`
+- 对比模式：`/vibe-quality-plugin:quality-check <before_dir> <after_dir> [--html]`
+- 评分校准：`/vibe-quality-plugin:calibrate <dir> [--level <production|good|prototype>]`
 
 ## 无传统构建系统
 
